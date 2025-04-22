@@ -23,25 +23,13 @@ def login():
     login_btn = st.button("Login")
 
     if login_btn:
-        # Hardcoded users
-        if (username, password) == ("sankaran", "sankaran123"):
-            st.session_state['user'] = "Sankaran"
-            st.session_state['role'] = "USER"
-            st.success("Login successful!")
-            st.experimental_rerun()
-        elif (username, password) == ("sharans", "sharans123"):
-            st.session_state['user'] = "sharans"
+        if ldap_authenticate(username, password):
+            st.session_state['user'] = username
             st.session_state['role'] = "USER"
             st.success("Login successful!")
             st.experimental_rerun()
         else:
-            if ldap_authenticate(username, password):
-                st.session_state['user'] = username
-                st.session_state['role'] = "USER"
-                st.success("Login successful!")
-                st.experimental_rerun()
-            else:
-                st.error("Invalid credentials.")
+            st.error("Invalid credentials.")
 
 if 'user' in st.session_state:
     # Redirect to apps.py after successful login
