@@ -27,6 +27,11 @@ st.markdown("""
         margin-bottom: 0 !important; /* Force no bottom margin */
     }
 
+    /* Remove top padding from main block container */
+    .block-container {
+        padding-top: 0 !important;
+    }
+
     .announcement {
         background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
         color: #166534;
@@ -132,6 +137,11 @@ st.markdown("""
         0% { box-shadow: 0 4px 15px rgba(22, 163, 74, 0.15); }
         50% { box-shadow: 0 4px 20px rgba(22, 163, 74, 0.25); }
         100% { box-shadow: 0 4px 15px rgba(22, 163, 74, 0.15); }
+    }
+
+    /* Hide Streamlit header */
+    header[data-testid="stHeader"] {
+        display: none !important;
     }
     </style>
 """, unsafe_allow_html=True)
