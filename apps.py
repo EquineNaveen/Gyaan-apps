@@ -97,12 +97,12 @@ st.markdown("""
         justify-content: center;
         align-items: center;
         gap: 10px;
-        position: static;
-        left: unset;
-        bottom: unset;
-        width: 100%;
-        background: transparent;
-        z-index: 100;
+        position: fixed !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        background: #fff !important;
+        z-index: 9999 !important;
         margin-bottom: 0 !important; /* Ensure footer itself has no bottom margin */
     }
 
@@ -113,6 +113,8 @@ st.markdown("""
 
     .footer-text {
         font-weight: bold;
+        color: #222; /* Ensure text is visible on white background */
+        font-size: 1.1em; /* Slightly larger for clarity */
     }
 
     @keyframes slideDown {
@@ -130,6 +132,29 @@ st.markdown("""
         0% { box-shadow: 0 4px 15px rgba(22, 163, 74, 0.15); }
         50% { box-shadow: 0 4px 20px rgba(22, 163, 74, 0.25); }
         100% { box-shadow: 0 4px 15px rgba(22, 163, 74, 0.15); }
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+    <style>
+    html, body, [data-testid="stAppViewContainer"], [data-testid="stAppViewContainer"] > .main {
+        height: 100vh !important;
+        min-height: 100vh !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+        box-sizing: border-box;
+    }
+    .footer {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+        position: fixed !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        background: #fff !important;
+        z-index: 9999 !important;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
     }
     </style>
 """, unsafe_allow_html=True)
@@ -170,7 +195,6 @@ for i, card in enumerate(cards):
 
 # --- Footer ---
 st.markdown("""
-<div style="flex:1"></div>
 <div class="footer">
     <div class="footer-text">🚀 Built by Team GYAAN</div>
 </div>
