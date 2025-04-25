@@ -4,6 +4,20 @@ import base64
 # --- Page Configuration ---
 st.set_page_config(page_title="Home - Gyaan Apps", layout="wide")
 
+# Hide sidebar, sidebar nav, sidebar arrow SVG, and sidebar collapse button
+st.markdown("""
+    <style>
+    [data-testid="stSidebar"] {display: none !important;}
+    div[data-testid="stSidebarNav"] {display: none !important;}
+    /* Hide sidebar arrow SVG by class and tag */
+    svg.eyeqlp53.st-emotion-cache-1f3w014 {display: none !important;}
+    /* Fallback: hide any SVG inside sidebar nav */
+    [data-testid="stSidebarNav"] svg {display: none !important;}
+    /* Hide sidebar collapse/expand button */
+    button[data-testid="stBaseButton-headerNoPadding"] {display: none !important;}
+    </style>
+""", unsafe_allow_html=True)
+
 # --- Inject Custom CSS ---
 st.markdown("""
     <style>
@@ -181,7 +195,7 @@ cards = [
     {"name": "Document", "img": "artifacts/2.jpg", "link": "#"},
     {"name": "Meeting", "img": "artifacts/3.jpg", "link": "#"},
     {"name": "Admin", "img": "artifacts/4.jpg", "link": "admin-login.html"},
-    {"name": "X-ray", "img": "artifacts/5.jpg", "link": "#"},
+    {"name": "X-ray", "img": "artifacts/5.jpg", "link": "http://192.168.31.13:8501"},
 ]
 
 def get_base64_image(image_path):
@@ -195,8 +209,10 @@ cols = st.columns(3)  # Adjust the number based on how many cards you want per r
 for i, card in enumerate(cards):
     with cols[i % 3]:  # This distributes cards across columns
         img_base64 = get_base64_image(card['img'])
+        # Open external links in a new tab
+        target = "_blank" if card['link'].startswith("http") else "_self"
         card_html = f'''
-        <a href="{card['link']}" class="stCard" target="_self">
+        <a href="{card['link']}" class="stCard" target="{target}">
             <img src="data:image/jpeg;base64,{img_base64}" class="card-image">
             <p class="card-title">{card["name"]}</p>
         </a>

@@ -1,6 +1,19 @@
 import streamlit as st
 from ldap3 import Server, Connection, ALL, NTLM, SIMPLE, ALL_ATTRIBUTES, SUBTREE, core
 
+st.markdown("""
+    <style>
+    [data-testid="stSidebar"] {display: none !important;}
+    /* Hide default Streamlit sidebar navigation */
+    div[data-testid="stSidebarNav"] {
+        display: none;
+    }
+    /* Hide sidebar collapse/expand button and its parent container */
+    button[data-testid="stBaseButton-headerNoPadding"] {display: none !important;}
+    div.st-emotion-cache-1y9tyez.eczjsme4 {display: none !important;}
+    </style>
+""", unsafe_allow_html=True)
+
 def ldap_authenticate(username: str, password: str):
     # server_uri = "ldap://10.21.6.164:389"
     # base_dn = "dc=dos"
@@ -17,7 +30,7 @@ def ldap_authenticate(username: str, password: str):
     #     return False
 
 def login():
-    st.title("Login Page")
+    st.markdown("<h1 style='text-align: center;'>Login Page</h1>", unsafe_allow_html=True)
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     login_btn = st.button("Login")
